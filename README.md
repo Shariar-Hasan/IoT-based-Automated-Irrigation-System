@@ -13,8 +13,14 @@ University of Chittagong
 
 ---
 
-<center> 
-![GitHub Repo Stars](https://img.shields.io/github/stars/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?style=social) ![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Build Status](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?branch=master)](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System) [![Download ZIP](https://img.shields.io/badge/Download-ZIP-brightgreen.svg)](https://codeload.github.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System/zip/refs/heads/main)</center>
+![GitHub Repo Stars](https://img.shields.io/github/stars/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?style=social)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Build Status](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?branch=master)](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System)
+[![Download ZIP](https://img.shields.io/badge/Download-ZIP-brightgreen.svg)](https://codeload.github.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System/zip/refs/heads/main)
+![Repository Size](https://img.shields.io/github/repo-size/Shariar-Hasan/IoT-based-Automated-Irrigation-System)
+![Last Commit](https://img.shields.io/github/last-commit/Shariar-Hasan/IoT-based-Automated-Irrigation-System)
+![Contributors](https://img.shields.io/github/contributors/Shariar-Hasan/IoT-based-Automated-Irrigation-System)
+
 ---
 
 ## Table of Contents
