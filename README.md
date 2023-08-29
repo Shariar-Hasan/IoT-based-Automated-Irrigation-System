@@ -13,6 +13,19 @@ University of Chittagong
 
 ---
 
+<center> 
+![GitHub Repo Stars](https://img.shields.io/github/stars/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?style=social) ![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Build Status](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System.svg?branch=master)](https://travis-ci.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System) [![Download ZIP](https://img.shields.io/badge/Download-ZIP-brightgreen.svg)](https://codeload.github.com/Shariar-Hasan/IoT-based-Automated-Irrigation-System/zip/refs/heads/main)</center>
+---
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Features](#project-features)
+- [Installation and Setup](#installation-and-setup)
+- [Usage](#usage)
+- [Contact](#contact)
+- [License](#license)
+
 ## Project Overview
 
 The **IoT based Automated Irrigation System & Mobile App for Tea Garden** is a B.Sc. Engineering thesis project carried out in partial fulfillment of the requirements for the degree of B.Sc. (Engineering) in Computer Science and Engineering at the University of Chittagong. This project aims to develop an automated irrigation system for tea gardens using Internet of Things (IoT) technology along with a mobile app interface.
