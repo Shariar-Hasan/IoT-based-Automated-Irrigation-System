@@ -58,6 +58,43 @@
         animation: slideInRight 0.8s ease-out forwards;
       }
 
+      @keyframes gradient-shift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient-shift 8s ease infinite;
+      }
+
+      @keyframes bounce-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+      }
+
+      .animate-bounce-slow {
+        animation: bounce-slow 2s ease-in-out infinite;
+      }
+
+      @keyframes rotate-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .animate-rotate-slow {
+        animation: rotate-slow 20s linear infinite;
+      }
+
+      @keyframes scale-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+
+      .animate-scale-pulse {
+        animation: scale-pulse 3s ease-in-out infinite;
+      }
+
       .gradient-text {
         background: linear-gradient(45deg, #3b82f6, #8b5cf6);
         -webkit-background-clip: text;
@@ -71,6 +108,47 @@
       
       .card-hover:hover {
         transform: translateY(-10px) scale(1.02);
+      }
+
+      /* Particle background */
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: float-particle 15s infinite;
+      }
+
+      @keyframes float-particle {
+        0% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) scale(1);
+          opacity: 0;
+        }
+      }
+
+      /* Glowing effect */
+      .glow {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+      }
+
+      .glow:hover {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
       }
 
       /* Dark mode styles */
@@ -118,27 +196,62 @@
       .dark .to-blue-50 {
         --tw-gradient-to: #111827 !important;
       }
+
+      /* Progress bar animation */
+      @keyframes progress {
+        from { width: 0%; }
+        to { width: var(--progress); }
+      }
+
+      .progress-bar {
+        animation: progress 2s ease-out forwards;
+      }
+
+      /* Typing effect */
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+      }
+
+      @keyframes blink {
+        50% { border-color: transparent }
+      }
+
+      .typing-text {
+        overflow: hidden;
+        border-right: 3px solid;
+        white-space: nowrap;
+        animation: typing 3.5s steps(40) 1s 1 normal both, blink 0.75s step-end infinite;
+      }
     </style>
   </head>
   <body class="bg-gradient-to-br from-gray-50 to-blue-50 text-gray-900 transition-colors duration-300">
     
-    <!-- Dark/Light Mode Toggle -->
-    <!-- <button id="themeToggle" 
-            class="fixed top-6 right-6 z-50 bg-white dark:bg-gray-800 text-gray-800 dark:text-white w-12 h-12 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 flex items-center justify-center group border-2 border-gray-200 dark:border-gray-700">
-      <i class="fas fa-moon text-xl hidden dark:inline"></i>
-      <i class="fas fa-sun text-xl inline dark:hidden"></i>
-    </button> -->
+    <!-- Particle Background -->
+    <div class="particles fixed inset-0 pointer-events-none z-0" id="particles"></div>
 
     <!-- Animated Header Section -->
-    <header class="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 py-10 shadow-2xl relative overflow-hidden">
+    <header class="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 py-10 shadow-2xl relative overflow-hidden animate-gradient">
       <div class="absolute inset-0 bg-black opacity-10"></div>
+      
+      <!-- Floating Icons -->
+      <div class="absolute top-10 left-10 text-white/20 text-6xl animate-float">
+        <i class="fas fa-cloud"></i>
+      </div>
+      <div class="absolute bottom-10 right-20 text-white/20 text-5xl animate-bounce-slow">
+        <i class="fas fa-seedling"></i>
+      </div>
+      <div class="absolute top-20 right-10 text-white/20 text-4xl animate-float" style="animation-delay: 1s;">
+        <i class="fas fa-wifi"></i>
+      </div>
+
       <div class="container mx-auto px-4 relative z-10">
         <div class="animate-fadeIn">
           <h1 class="text-4xl md:text-5xl text-white font-bold text-center mb-3 drop-shadow-lg">
-            <i class="fas fa-leaf mr-3"></i>
+            <i class="fas fa-leaf mr-3 animate-rotate-slow inline-block"></i>
             IoT-based Automated Irrigation System
           </h1>
-          <p class="text-center text-blue-100 text-lg md:text-xl font-light">
+          <p class="text-center text-blue-100 text-lg md:text-xl font-light typing-text inline-block mx-auto" style="max-width: 600px;">
             <i class="fas fa-seedling mr-2"></i>
             Enhancing Agriculture Through Technology
           </p>
@@ -161,24 +274,24 @@
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
             <div class="absolute bottom-0 left-0 right-0 p-8">
               <div class="flex items-center space-x-3 mb-3">
-                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center animate-pulse-slow">
+                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center animate-pulse-slow glow">
                   <i class="fas fa-check text-white text-xl"></i>
                 </div>
                 <span class="text-green-400 font-semibold text-lg">System Active</span>
               </div>
               <div class="grid grid-cols-3 gap-4 mt-4">
-                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center">
-                  <i class="fas fa-droplet text-blue-400 text-2xl mb-2"></i>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center hover:bg-white/20 transition-all transform hover:scale-105 cursor-pointer">
+                  <i class="fas fa-droplet text-blue-400 text-2xl mb-2 animate-bounce-slow"></i>
                   <p class="text-white font-semibold">40%</p>
                   <p class="text-gray-300 text-xs">Water Saved</p>
                 </div>
-                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center">
-                  <i class="fas fa-chart-line text-green-400 text-2xl mb-2"></i>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center hover:bg-white/20 transition-all transform hover:scale-105 cursor-pointer">
+                  <i class="fas fa-chart-line text-green-400 text-2xl mb-2 animate-bounce-slow" style="animation-delay: 0.3s;"></i>
                   <p class="text-white font-semibold">25%</p>
                   <p class="text-gray-300 text-xs">Yield Increase</p>
                 </div>
-                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center">
-                  <i class="fas fa-clock text-purple-400 text-2xl mb-2"></i>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-center hover:bg-white/20 transition-all transform hover:scale-105 cursor-pointer">
+                  <i class="fas fa-clock text-purple-400 text-2xl mb-2 animate-bounce-slow" style="animation-delay: 0.6s;"></i>
                   <p class="text-white font-semibold">24/7</p>
                   <p class="text-gray-300 text-xs">Monitoring</p>
                 </div>
@@ -189,8 +302,8 @@
           <!-- Right Side - Content -->
           <div class="space-y-6 animate-slideInRight">
             <div class="inline-block">
-              <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-                <i class="fas fa-robot mr-2"></i>AI-Powered Solution
+              <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg animate-pulse glow">
+                <i class="fas fa-robot mr-2 animate-float"></i>AI-Powered Solution
               </span>
             </div>
             
@@ -203,8 +316,39 @@
               Precision farming at your fingertips with real-time monitoring, automated controls, and intelligent water management.
             </p>
 
+            <!-- Animated Progress Bars -->
+            <div class="space-y-4 pt-4">
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-medium dark:text-white">Automation Level</span>
+                  <span class="text-sm font-medium dark:text-white">95%</span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full progress-bar" style="--progress: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-medium dark:text-white">Energy Efficiency</span>
+                  <span class="text-sm font-medium dark:text-white">88%</span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div class="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full progress-bar" style="--progress: 88%; animation-delay: 0.3s;"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-2">
+                  <span class="text-sm font-medium dark:text-white">User Satisfaction</span>
+                  <span class="text-sm font-medium dark:text-white">92%</span>
+                </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div class="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full progress-bar" style="--progress: 92%; animation-delay: 0.6s;"></div>
+                </div>
+              </div>
+            </div>
+
             <div class="flex flex-wrap gap-4">
-              <a href="#about" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group">
+              <a href="#about" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 group glow">
                 Learn More
                 <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
               </a>
@@ -216,19 +360,43 @@
 
             <!-- Feature Pills -->
             <div class="flex flex-wrap gap-3 pt-4">
-              <div class="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full">
-                <i class="fas fa-wifi text-blue-600 dark:text-blue-400"></i>
+              <div class="flex items-center space-x-2 bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-full hover:scale-105 transition-transform cursor-pointer">
+                <i class="fas fa-wifi text-blue-600 dark:text-blue-400 animate-pulse"></i>
                 <span class="text-sm font-medium text-gray-700 dark:text-gray-300">IoT Connected</span>
               </div>
-              <div class="flex items-center space-x-2 bg-green-50 dark:bg-green-900/30 px-4 py-2 rounded-full">
-                <i class="fas fa-mobile-alt text-green-600 dark:text-green-400"></i>
+              <div class="flex items-center space-x-2 bg-green-50 dark:bg-green-900/30 px-4 py-2 rounded-full hover:scale-105 transition-transform cursor-pointer">
+                <i class="fas fa-mobile-alt text-green-600 dark:text-green-400 animate-pulse" style="animation-delay: 0.3s;"></i>
                 <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Mobile App</span>
               </div>
-              <div class="flex items-center space-x-2 bg-purple-50 dark:bg-purple-900/30 px-4 py-2 rounded-full">
-                <i class="fas fa-cloud text-purple-600 dark:text-purple-400"></i>
+              <div class="flex items-center space-x-2 bg-purple-50 dark:bg-purple-900/30 px-4 py-2 rounded-full hover:scale-105 transition-transform cursor-pointer">
+                <i class="fas fa-cloud text-purple-600 dark:text-purple-400 animate-pulse" style="animation-delay: 0.6s;"></i>
                 <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Cloud Based</span>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Statistics Banner -->
+    <section class="py-12 px-4 bg-gradient-to-r from-blue-600 to-purple-600 animate-gradient">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="text-center text-white transform hover:scale-110 transition-transform cursor-pointer">
+            <div class="text-5xl font-bold mb-2 counter" data-target="500">0</div>
+            <div class="text-blue-100">Active Users</div>
+          </div>
+          <div class="text-center text-white transform hover:scale-110 transition-transform cursor-pointer">
+            <div class="text-5xl font-bold mb-2 counter" data-target="1200">0</div>
+            <div class="text-blue-100">Installations</div>
+          </div>
+          <div class="text-center text-white transform hover:scale-110 transition-transform cursor-pointer">
+            <div class="text-5xl font-bold mb-2"><span class="counter" data-target="40">0</span>%</div>
+            <div class="text-blue-100">Water Saved</div>
+          </div>
+          <div class="text-center text-white transform hover:scale-110 transition-transform cursor-pointer">
+            <div class="text-5xl font-bold mb-2"><span class="counter" data-target="98">0</span>%</div>
+            <div class="text-blue-100">Uptime</div>
           </div>
         </div>
       </div>
@@ -238,13 +406,13 @@
     <section id="about" class="py-20 px-4">
       <div class="container mx-auto max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-info-circle mr-3"></i>About the Project
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-info-circle mr-3 animate-float"></i>About the Project
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 mb-8">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 mb-8 hover:shadow-2xl transition-shadow">
           <p class="text-lg mb-6 leading-relaxed text-gray-700 dark:text-gray-300">
             Our project, <strong>"IoT-based Automated Irrigation System & Mobile App for Tea Garden"</strong> is a
             groundbreaking solution designed to revolutionize agriculture by
@@ -256,29 +424,29 @@
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl">
-              <i class="fas fa-tint text-3xl text-blue-600 dark:text-blue-400 mt-1"></i>
+            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl transform hover:scale-105 transition-all cursor-pointer">
+              <i class="fas fa-tint text-3xl text-blue-600 dark:text-blue-400 mt-1 animate-bounce-slow"></i>
               <div>
                 <h4 class="font-semibold text-lg mb-1 dark:text-white">Optimize Water Usage</h4>
                 <p class="text-gray-600 dark:text-gray-400">Save up to 40% water with smart irrigation</p>
               </div>
             </div>
-            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl">
-              <i class="fas fa-chart-line text-3xl text-green-600 dark:text-green-400 mt-1"></i>
+            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl transform hover:scale-105 transition-all cursor-pointer">
+              <i class="fas fa-chart-line text-3xl text-green-600 dark:text-green-400 mt-1 animate-bounce-slow" style="animation-delay: 0.2s;"></i>
               <div>
                 <h4 class="font-semibold text-lg mb-1 dark:text-white">Enhance Crop Yield</h4>
                 <p class="text-gray-600 dark:text-gray-400">Increase productivity by 25%</p>
               </div>
             </div>
-            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl">
-              <i class="fas fa-user-clock text-3xl text-purple-600 dark:text-purple-400 mt-1"></i>
+            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl transform hover:scale-105 transition-all cursor-pointer">
+              <i class="fas fa-user-clock text-3xl text-purple-600 dark:text-purple-400 mt-1 animate-bounce-slow" style="animation-delay: 0.4s;"></i>
               <div>
                 <h4 class="font-semibold text-lg mb-1 dark:text-white">Reduce Workload</h4>
                 <p class="text-gray-600 dark:text-gray-400">Automate repetitive farming tasks</p>
               </div>
             </div>
-            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 rounded-xl">
-              <i class="fas fa-leaf text-3xl text-teal-600 dark:text-teal-400 mt-1"></i>
+            <div class="flex items-start space-x-4 p-4 bg-gradient-to-r from-teal-50 to-teal-100 dark:from-teal-900/30 dark:to-teal-800/30 rounded-xl transform hover:scale-105 transition-all cursor-pointer">
+              <i class="fas fa-leaf text-3xl text-teal-600 dark:text-teal-400 mt-1 animate-bounce-slow" style="animation-delay: 0.6s;"></i>
               <div>
                 <h4 class="font-semibold text-lg mb-1 dark:text-white">Sustainable Farming</h4>
                 <p class="text-gray-600 dark:text-gray-400">Eco-friendly agriculture practices</p>
@@ -293,15 +461,15 @@
     <section id="features" class="py-20 px-4 bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
       <div class="container mx-auto max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-star mr-3"></i>Key Features
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-star mr-3 animate-rotate-slow"></i>Key Features
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-blue-500">
-            <div class="bg-gradient-to-br from-blue-500 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-blue-500 glow">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float animate-scale-pulse">
               <i class="fas fa-tint text-2xl text-white"></i>
             </div>
             <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Water Efficiency</h3>
@@ -311,8 +479,8 @@
             </p>
           </div>
           
-          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-purple-500">
-            <div class="bg-gradient-to-br from-purple-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float" style="animation-delay: 0.2s;">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-purple-500 glow">
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float animate-scale-pulse" style="animation-delay: 0.2s;">
               <i class="fas fa-mobile-alt text-2xl text-white"></i>
             </div>
             <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Remote Monitoring</h3>
@@ -322,8 +490,8 @@
             </p>
           </div>
           
-          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-green-500">
-            <div class="bg-gradient-to-br from-green-500 to-green-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float" style="animation-delay: 0.4s;">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-xl card-hover border-t-4 border-green-500 glow">
+            <div class="bg-gradient-to-br from-green-500 to-green-600 w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-float animate-scale-pulse" style="animation-delay: 0.4s;">
               <i class="fas fa-recycle text-2xl text-white"></i>
             </div>
             <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Sustainability</h3>
@@ -340,13 +508,13 @@
     <section class="py-20 px-4">
       <div class="container mx-auto max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-project-diagram mr-3"></i>Data Flow Diagram
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-project-diagram mr-3 animate-float"></i>Data Flow Diagram
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 overflow-hidden">
-          <img class="w-full md:w-2/3 mx-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300" 
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 overflow-hidden hover:shadow-2xl transition-shadow">
+          <img class="w-full md:w-2/3 mx-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105" 
                src="./Final Defence/Assets/Data Flow diagram.png" 
                alt="Data Flow Diagram">
         </div>
@@ -357,13 +525,13 @@
     <section class="py-20 px-4 bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
       <div class="container mx-auto max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-lightbulb mr-3"></i>Motivation
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-lightbulb mr-3 animate-pulse"></i>Motivation
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 overflow-hidden">
-          <img class="w-full md:w-2/3 mx-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300" 
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 overflow-hidden hover:shadow-2xl transition-shadow">
+          <img class="w-full md:w-2/3 mx-auto rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105" 
                src="./Final Defence/Assets/Motivation.png" 
                alt="Motivation">
         </div>
@@ -374,16 +542,16 @@
     <section id="downloads" class="py-20 px-4">
       <div class="container mx-auto max-w-6xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-download mr-3"></i>Downloads
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-download mr-3 animate-bounce-slow"></i>Downloads
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <a href="./Final Defence/Project Arduino Code/Code_of_Project.ino/Code_of_Project.ino.ino"
-             class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl p-8 shadow-xl card-hover flex items-center space-x-6 group">
-            <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center">
+             class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-2xl p-8 shadow-xl card-hover flex items-center space-x-6 group glow animate-gradient">
+            <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center animate-scale-pulse">
               <i class="fas fa-code text-3xl"></i>
             </div>
             <div class="flex-1">
@@ -394,8 +562,8 @@
           </a>
           
           <a href="./Final Defence/Report Submission/18701012 Final Report Seminer Copy.pdf"
-             class="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl p-8 shadow-xl card-hover flex items-center space-x-6 group">
-            <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center">
+             class="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl p-8 shadow-xl card-hover flex items-center space-x-6 group glow animate-gradient">
+            <div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center animate-scale-pulse">
               <i class="fas fa-file-pdf text-3xl"></i>
             </div>
             <div class="flex-1">
@@ -412,20 +580,20 @@
     <section id="contact" class="py-20 px-4 bg-gradient-to-b from-gray-100 to-white dark:from-gray-800 dark:to-gray-900">
       <div class="container mx-auto max-w-4xl">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold gradient-text mb-4">
-            <i class="fas fa-envelope mr-3"></i>Contact Us
+          <h2 class="text-4xl font-bold gradient-text mb-4 animate-fadeIn">
+            <i class="fas fa-envelope mr-3 animate-float"></i>Contact Us
           </h2>
           <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
         
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12 hover:shadow-2xl transition-shadow">
           <p class="text-lg mb-8 text-center text-gray-700 dark:text-gray-300">
             If you have any questions or would like to learn more about our project, feel free to reach out:
           </p>
           
           <div class="space-y-6">
-            <div class="flex items-center space-x-4 p-6 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl hover:shadow-lg transition-shadow">
-              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center">
+            <div class="flex items-center space-x-4 p-6 bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer">
+              <div class="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center animate-pulse">
                 <i class="fas fa-envelope text-white text-xl"></i>
               </div>
               <div>
@@ -437,8 +605,8 @@
               </div>
             </div>
             
-            <div class="flex items-center space-x-4 p-6 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl hover:shadow-lg transition-shadow">
-              <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center">
+            <div class="flex items-center space-x-4 p-6 bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-xl hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer">
+              <div class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center animate-pulse" style="animation-delay: 0.3s;">
                 <i class="fas fa-phone text-white text-xl"></i>
               </div>
               <div>
@@ -469,7 +637,7 @@
           <!-- About Column -->
           <div class="space-y-4">
             <div class="flex items-center space-x-3 mb-4">
-              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center animate-scale-pulse">
                 <i class="fas fa-leaf text-2xl"></i>
               </div>
               <h3 class="text-2xl font-bold">IoT Irrigation</h3>
@@ -478,16 +646,16 @@
               Revolutionizing agriculture through smart IoT technology and automated irrigation systems.
             </p>
             <div class="flex space-x-4 pt-4">
-              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110 hover:rotate-12">
                 <i class="fab fa-facebook-f"></i>
               </a>
-              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110 hover:rotate-12">
                 <i class="fab fa-twitter"></i>
               </a>
-              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+              <a href="#" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110 hover:rotate-12">
                 <i class="fab fa-linkedin-in"></i>
               </a>
-              <a href="https://github.com/Shariar-Hasan" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110">
+              <a href="https://github.com/Shariar-Hasan" class="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all transform hover:scale-110 hover:rotate-12">
                 <i class="fab fa-github"></i>
               </a>
             </div>
@@ -496,7 +664,7 @@
           <!-- Quick Links -->
           <div>
             <h4 class="text-lg font-bold mb-6 flex items-center">
-              <i class="fas fa-link mr-2 text-blue-400"></i>
+              <i class="fas fa-link mr-2 text-blue-400 animate-pulse"></i>
               Quick Links
             </h4>
             <ul class="space-y-3">
@@ -530,7 +698,7 @@
           <!-- Resources -->
           <div>
             <h4 class="text-lg font-bold mb-6 flex items-center">
-              <i class="fas fa-book mr-2 text-purple-400"></i>
+              <i class="fas fa-book mr-2 text-purple-400 animate-pulse" style="animation-delay: 0.3s;"></i>
               Resources
             </h4>
             <ul class="space-y-3">
@@ -564,12 +732,12 @@
           <!-- Contact Info -->
           <div>
             <h4 class="text-lg font-bold mb-6 flex items-center">
-              <i class="fas fa-address-book mr-2 text-green-400"></i>
+              <i class="fas fa-address-book mr-2 text-green-400 animate-pulse" style="animation-delay: 0.6s;"></i>
               Get in Touch
             </h4>
             <ul class="space-y-4">
               <li class="flex items-start space-x-3">
-                <i class="fas fa-envelope text-blue-400 mt-1"></i>
+                <i class="fas fa-envelope text-blue-400 mt-1 animate-bounce-slow"></i>
                 <div>
                   <p class="text-xs text-gray-400 mb-1">Email</p>
                   <a href="mailto:shahriar.hasan.1523@gmail.com" class="text-gray-300 hover:text-white transition-colors text-sm">
@@ -578,7 +746,7 @@
                 </div>
               </li>
               <li class="flex items-start space-x-3">
-                <i class="fas fa-phone text-green-400 mt-1"></i>
+                <i class="fas fa-phone text-green-400 mt-1 animate-bounce-slow" style="animation-delay: 0.3s;"></i>
                 <div>
                   <p class="text-xs text-gray-400 mb-1">Phone</p>
                   <a href="tel:+8801866088233" class="text-gray-300 hover:text-white transition-colors text-sm">
@@ -587,7 +755,7 @@
                 </div>
               </li>
               <li class="flex items-start space-x-3">
-                <i class="fas fa-map-marker-alt text-red-400 mt-1"></i>
+                <i class="fas fa-map-marker-alt text-red-400 mt-1 animate-bounce-slow" style="animation-delay: 0.6s;"></i>
                 <div>
                   <p class="text-xs text-gray-400 mb-1">Location</p>
                   <p class="text-gray-300 text-sm">Bangladesh</p>
@@ -634,25 +802,62 @@
 
     <!-- Scroll to Top Button -->
     <button id="scrollTop" 
-            class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white w-14 h-14 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group z-40">
+            class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white w-14 h-14 rounded-full shadow-2xl hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none flex items-center justify-center group z-40 glow animate-gradient">
       <i class="fas fa-arrow-up text-xl group-hover:-translate-y-1 transition-transform"></i>
     </button>
 
     <script>
-      // Dark Mode Toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const html = document.documentElement;
-      
-      // Check for saved theme preference or default to light mode
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      if (currentTheme === 'dark') {
-        html.classList.add('dark');
+      // Particle Background Generator
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          particle.style.width = Math.random() * 4 + 2 + 'px';
+          particle.style.height = particle.style.width;
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+          particle.style.animationDelay = Math.random() * 5 + 's';
+          particlesContainer.appendChild(particle);
+        }
       }
 
-      themeToggle.addEventListener('click', () => {
-        html.classList.toggle('dark');
-        const theme = html.classList.contains('dark') ? 'dark' : 'light';
-        localStorage.setItem('theme', theme);
+      createParticles();
+
+      // Counter Animation
+      const counters = document.querySelectorAll('.counter');
+      const speed = 200;
+
+      const animateCounter = (counter) => {
+        const target = +counter.getAttribute('data-target');
+        const increment = target / speed;
+
+        const updateCount = () => {
+          const count = +counter.innerText;
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(updateCount, 10);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        updateCount();
+      };
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(counter => {
+        counterObserver.observe(counter);
       });
 
       // Scroll to top functionality
